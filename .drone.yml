@@ -10,7 +10,6 @@ pipeline:
 #    commands:
 #      - dotnet restore
 #      - dotnet test
-
   push:
     image: plugins/docker
     dockerfile: Dockerfile
