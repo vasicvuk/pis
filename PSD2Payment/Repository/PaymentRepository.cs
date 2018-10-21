@@ -37,6 +37,10 @@ namespace PSD2Payment.Repository
             {
                 return PaymentCommandResult.INSUFISHENT_FUNDS;
             }
+            if(command.InstructedAmount.Amount < 0)
+            {
+                return PaymentCommandResult.AMOUNT_CANNOT_BE_NEGATIVE;
+            }
             balance.BalanceAmount.Amount = balance.BalanceAmount.Amount - command.InstructedAmount.Amount;
             _context.Update(deptorAccount);
             _context.SaveChanges();

@@ -2,17 +2,20 @@ pipeline:
   build:
     image: microsoft/dotnet:2.1-sdk
     commands:
+      - cd PSD2Payment
       - dotnet restore
       - dotnet publish -c Release -o out
 
-#  test:
-#    image: microsoft/dotnet:2.1-sdk
-#    commands:
-#      - dotnet restore
-#      - dotnet test
+  test:
+    image: microsoft/dotnet:2.1-sdk
+    commands:
+      - cd PSD2Payment.Test
+      - dotnet restore
+      - dotnet test
   push:
     image: plugins/docker
-    dockerfile: Dockerfile
+    context: PSD2Payment
+    dockerfile: PSD2Payment/Dockerfile
     repo: asseco/sinergija-demo
     secrets: [docker_username, docker_password]
     volumes:

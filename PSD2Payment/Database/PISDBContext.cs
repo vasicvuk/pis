@@ -99,15 +99,16 @@ namespace PSD2Payment.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            if (optionsBuilder.IsConfigured) return;
-            IConfiguration configuration = new ConfigurationBuilder()
-                  .SetBasePath(Path.GetDirectoryName(GetType().GetTypeInfo().Assembly.Location))
-                  .AddJsonFile($"configuration/appsettings.json", optional: false, reloadOnChange: false)
-                  .AddJsonFile($"configuration/appsettings.{envName}.json", optional: true)
-                  .AddEnvironmentVariables()
-                  .Build();
-            ConnectionFactory.DatabaseConfiguration("psd2", optionsBuilder, configuration, null, true);
+                var envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+                if (optionsBuilder.IsConfigured) return;
+                IConfiguration configuration = new ConfigurationBuilder()
+                      .SetBasePath(Path.GetDirectoryName(GetType().GetTypeInfo().Assembly.Location))
+                      .AddJsonFile($"configuration/appsettings.json", optional: false, reloadOnChange: false)
+                      .AddJsonFile($"configuration/appsettings.{envName}.json", optional: true)
+                      .AddEnvironmentVariables()
+                      .Build();
+                ConnectionFactory.DatabaseConfiguration("psd2", optionsBuilder, configuration, null, true);
+           
         }
         
     }

@@ -12,7 +12,8 @@ namespace PSD2Payment.Application.Command
         INSUFISHENT_FUNDS,
         TEMPORARY_ERROR,
         ACCOUNT_NOT_FOUND,
-        NO_CURRENCY_ACCOUNT
+        NO_CURRENCY_ACCOUNT,
+        AMOUNT_CANNOT_BE_NEGATIVE
     }
     public class CreditorAddress
     {
