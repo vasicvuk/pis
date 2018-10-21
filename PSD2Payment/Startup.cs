@@ -45,22 +45,28 @@ namespace PSD2Payment
             }
 
             app.UseMvc();
+            MigrateDb(app);
+        }
 
+        public void MigrateDb(IApplicationBuilder app)
+        {
+            PISDBContext context = null;
             try
             {
-                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
-                    .CreateScope())
-                {
+                var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                    .CreateScope();
+                context = serviceScope.ServiceProvider.GetService<PISDBContext>();
+                context.Database.Migrate();
 
-                    serviceScope.ServiceProvider.GetService<PISDBContext>()
-                        .Database.EnsureCreated();
+            }
+            catch (InvalidOperationException e)
+            {
+                if (e.Source.Equals("Microsoft.EntityFrameworkCore.Relational"))
+                {
+                    context.Database.EnsureCreated();
                 }
             }
-            catch (Exception e)
-            {
-                var msg = e.Message;
-                var stacktrace = e.StackTrace;
-            }
+
         }
 
     }

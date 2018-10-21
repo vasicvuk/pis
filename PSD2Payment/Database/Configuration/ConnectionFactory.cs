@@ -81,8 +81,17 @@ namespace PSD2Payment.Database.Configuration
             }
             else
             {
-                connectionString = configuration["DbName"];
-                options.UseInMemoryDatabase(connectionString);
+                connectionString = configuration.GetConnectionString("DevelopmentConnectionString");
+                options.UseSqlServer(
+                     connectionString,
+                     b => {
+                         b.MigrationsHistoryTable(HistoryRepository.DefaultTableName, schema);
+                         if (migrationAssembly != null)
+                         {
+                             b.MigrationsAssembly(migrationAssembly);
+                         }
+                     }
+                );
             }
         }
     }
