@@ -5,4 +5,5 @@ WORKDIR /app
 COPY /out .
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+ENV DB_NAME psd2
 CMD ["bash", "/entrypoint.sh"]
