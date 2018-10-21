@@ -5,5 +5,6 @@ WORKDIR /app
 COPY /out .
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-ENV DB_NAME psd2
+ENV DATABASE_NAME psd2
+ENV DATABASE_TYPE InMemory
 CMD ["bash", "/entrypoint.sh"]
