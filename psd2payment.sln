@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSD2Payment", "PSD2Payment\PSD2Payment.csproj", "{B145657B-4FAE-4B21-968A-B0CD01760BC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSD2Payment.Test", "PSD2Payment.Test\PSD2Payment.Test.csproj", "{EF406AE7-C31C-44F7-B681-FEC54495D5C6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
