@@ -36,14 +36,12 @@ namespace PSD2Payment.Controllers
             return Ok(_accountRepository.GetAccountList());
         }
 
-        [HttpPost("accounts/information")]
-        public IActionResult GetAccountInformation([FromBody] RequestAccountInformationCommand ibanCommand)
+        [HttpGet("accounts/{accountId}")]
+        public IActionResult GetAccountInformation([FromRoute] string accountId)
         {
-            var result = _accountRepository.GetAccount(ibanCommand.Iban);
-            _logger.LogInformation("Getting account information for iban: {iban}", ibanCommand.Iban);
+            var result = _accountRepository.GetAccount(accountId);
             if (result == null)
             {
-                _logger.LogError("Could not find account with provided iban: {iban}", ibanCommand.Iban);
                 return BadRequest(new { error = "Could not find account with provided IBAN" });
             }
             return Ok(result);
