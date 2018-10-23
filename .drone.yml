@@ -4,7 +4,6 @@ pipeline:
     commands:
       - dotnet restore
       - dotnet publish -c Release -o out
-
   push:
     image: plugins/docker
     dockerfile: Dockerfile
