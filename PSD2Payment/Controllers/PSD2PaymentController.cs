@@ -17,14 +17,19 @@ namespace PSD2Payment.Controllers
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IPaymentRepository _paymentRepository;
+        private readonly IConnectionRepository _connectionRepository;
+
         private readonly ILogger<PSD2PaymentController> _logger;
 
         public PSD2PaymentController(
             IAccountRepository accountRepository,
             IPaymentRepository paymentRepository,
-            ILogger<PSD2PaymentController> logger)
+            IConnectionRepository connectionRepository,
+            ILogger<PSD2PaymentController> logger
+            )
         {
             _logger = logger;
+            _connectionRepository = connectionRepository;
             _accountRepository = accountRepository;
             _paymentRepository = paymentRepository;
         }
@@ -76,7 +81,15 @@ namespace PSD2Payment.Controllers
         [HttpGet(".well-known/health")]
         public IActionResult GetHealth()
         {
-            return Ok();
+            bool checkStatus = _connectionRepository.CheckConnection();
+            if (checkStatus)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
     }

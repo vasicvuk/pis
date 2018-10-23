@@ -34,6 +34,7 @@ namespace PSD2Payment
             );
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IPaymentRepository, PaymentRepository>();
+            services.AddScoped<IConnectionRepository, ConnectionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
