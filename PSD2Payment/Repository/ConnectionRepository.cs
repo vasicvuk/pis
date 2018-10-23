@@ -18,6 +18,11 @@ namespace PSD2Payment.Repository
 
         public bool CheckConnection()
         {
+            string dbType = Environment.GetEnvironmentVariable("DATABASE_TYPE");
+            if (dbType != null && dbType.ToLower().Equals("inmemory"))
+            {
+                return true;
+            }
             DbConnection conn = _dbContext.Database.GetDbConnection();
             try
             {
