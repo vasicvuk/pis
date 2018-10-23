@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "253975b2-2ad7-474e-851b-b8dc32fca42e",
+		"name": "Sinergija PSD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET psd2/v1/accounts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a474c959-1237-443d-9354-249ab15dec4d",
+						"exec": [
+							"pm.test(\"status code is ok\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"response is ok\", function () {",
+							"    var json = pm.response.json();",
+							"    pm.expect(json.length).to.equal(2);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{env}}/psd2/v1/accounts",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"psd2",
+						"v1",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET psd2/v1/accounts/information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abff833c-c8ca-42d3-a6b7-e83c047c06e0",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    var json = pm.response.json();",
+							"    pm.expect(json[\"iban\"]).to.equal(\"RS35105008123123123173\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"iban\": \"RS35105008123123123173\"\n}"
+				},
+				"url": {
+					"raw": "{{env}}/psd2/v1/accounts/RS35105008123123123173",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"psd2",
+						"v1",
+						"accounts",
+						"RS35105008123123123173"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST psd2/v1/payments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cc05d673-a2e2-47e3-8438-366f5f3d4ae6",
+						"exec": [
+							"pm.test(\"status code is ok\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"response is ok\", function () {",
+							"    var json = pm.response.json();",
+							"    pm.expect(json[\"iban\"]).to.equal(\"RS35105008123123123173\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"debtorAccount\": {\n\t\t\"iban\": \"RS35105008123123123173\",\n\t\t\"currency\": \"EUR\"\n\t},\n\t\"instructedAmount\": {\n\t\t\"currency\": \"EUR\",\n\t\t\"amount\": \"500\"\n\t},\n\t\"creditorAccount\": {\n\t\t\"iban\": \"RS15105208123123123179\",\n\t\t\"currency\": \"EUR\"\n\t},\n\t\"creditorName\": \"John Smith\",\n\t\"creditorAddress\": {\n\t\t\"street\": \"Bulevar of broken code\",\n\t\t\"city\": \"Alabama\",\n\t\t\"postalCode\": \"35005\",\n\t\t\"buildingNumber\": \"10\",\n\t\t\"country\": \"US\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{env}}/psd2/v1/payments",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"psd2",
+						"v1",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
