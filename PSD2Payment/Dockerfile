@@ -7,4 +7,4 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENV DATABASE_NAME psd2
 ENV DATABASE_TYPE InMemory
-CMD ["bash", "/entrypoint.sh"]
+CMD ["dotnet", "PSD2Payment.dll"]
