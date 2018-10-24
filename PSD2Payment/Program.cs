@@ -23,7 +23,7 @@ namespace PSD2Payment
              .MinimumLevel.Debug()
              .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
              .Enrich.FromLogContext()
-            .WriteTo.Console(); ;
+            .WriteTo.Console();
             if (centralLogHost != null && !centralLogHost.Equals(""))
             {
                 var centralLogPort = Environment.GetEnvironmentVariable("CENTRAL_LOG_PORT");
