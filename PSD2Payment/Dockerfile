@@ -15,5 +15,7 @@ RUN dotnet publish -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
+ENV DATABASE_TYPE InMemory
+ENV DATABASE_NAME psd2
 COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "PSD2Payment.dll"]
