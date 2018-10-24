@@ -19,3 +19,17 @@ pipeline:
     secrets: [docker_username, docker_password]
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
+  slack:
+    image: plugins/slack
+    secrets: [ slack_webhook ]
+    channel: drone
+    username: drone
+    when:
+      status: [ failure, success ]
+    template: >
+      {{#success build.status}}
+        Repo {{repo.name}} build {{build.number}} succeeded. Good job {{build.author}}.
+      {{else}}
+        Repo {{repo.name}} build {{build.number}} failed. {{build.author}} Fix me!.
+      {{/success}}
