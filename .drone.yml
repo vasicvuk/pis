@@ -20,6 +20,17 @@ pipeline:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
+  deploy_env:
+    image: asseco/sinergija-deploy
+    git_repo: strainovic/pis
+    helm_chart: pis
+
+  run_api_test:
+    image: asseco/api-test
+    commands:
+      - cd api-tests
+      - newman run postman_collection.json -e postman_environment.json --global-var "env=http://sinergija-test.asseco.rs" --reporters cli,html --reporter-html-export report.html
+
   slack:
     image: plugins/slack
     secrets: [ slack_webhook ]
@@ -33,3 +44,6 @@ pipeline:
       {{else}}
         Repo {{repo.name}} build {{build.number}} failed. {{build.author}} Fix me!.
       {{/success}}
+   
+   
+     
