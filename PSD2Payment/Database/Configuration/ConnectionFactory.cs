@@ -65,7 +65,7 @@ namespace PSD2Payment.Database.Configuration
                     switch (type)
                     {
                         case DBType.InMemory:
-                            options.UseInMemoryDatabase(connectionString);
+                            options.UseInMemoryDatabase(dbName);
                             break;
                         case DBType.MSSQL:
                             options.UseSqlServer(
