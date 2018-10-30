@@ -29,7 +29,7 @@ pipeline:
     image: postman/newman_alpine33
     commands:
       - cd api-tests
-      - newman run postman_collection.json -e postman_environment.json --global-var "env=http://sinergija-test.asseco.rs" --reporters cli,html --reporter-html-export report.html
+      - newman run postman_collection.json -e postman_environment.json --global-var "env=http://pis-test.asseco.rs" --reporters cli,html --reporter-html-export report.html
 
   slack:
     image: plugins/slack
